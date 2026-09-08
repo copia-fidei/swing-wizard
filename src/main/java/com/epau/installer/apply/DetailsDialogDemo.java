@@ -1,0 +1,16 @@
+package com.epau.installer.apply;
+
+import com.epau.installer.swing.TestFrames;
+import com.epau.utilities.swing.operation.examples.WaitOperation;
+import org.jetbrains.annotations.NonNls;
+
+
+@NonNls
+class DetailsDialogDemo {
+
+	private final static String TITLE = "Details Dialog";
+
+	static void main() {
+		TestFrames.showDialog(TITLE, frame -> new DetailsDialog(frame, new WaitOperation(10)));
+	}
+}
