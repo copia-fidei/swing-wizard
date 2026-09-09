@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NonNls;
 import javax.swing.Icon;
 import java.awt.Color;
 
+// TODO
 @NonNls
 public interface Icons {
 

@@ -58,7 +58,6 @@ public abstract class PagePool {
 	/// Provide operations.
 	protected abstract List<Supplier<Operation>> getOperations();
 
-
 	public void forward() {
 		int currentIndex = pages.indexOf(currentPage);
 		if (!(currentIndex < pages.size() - 1)) throw new IndexOutOfBoundsException("""

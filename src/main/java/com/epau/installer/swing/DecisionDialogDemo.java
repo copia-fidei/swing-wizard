@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NonNls;
 
 import java.util.List;
 
-public class DecisionDialogDemo {
+class DecisionDialogDemo {
 
 	static void main() {
 		@NonNls var options = List.of(

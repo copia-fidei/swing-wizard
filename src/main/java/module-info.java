@@ -8,7 +8,7 @@ module com.epau.installer {
 	requires static org.jetbrains.annotations;
 	requires org.apache.commons.compress;
 
-	requires com.epau.utilities.swing.operation;
+	requires transitive com.epau.utilities.swing.operation;
 	requires com.epau.utilities.nls;
 
 	opens com.epau.installer.apply to com.epau.utilities.nls;
@@ -20,5 +20,13 @@ module com.epau.installer {
 	opens com.epau.installer.validation.dialog to com.epau.utilities.nls;
 
 	opens com.epau.installer.icons.svgrepo;
+
+	exports com.epau.installer.apply;
+	exports com.epau.installer.page;
+	exports com.epau.installer.swing;
+	exports com.epau.installer.utilities;
+	exports com.epau.installer.validation;
+	exports com.epau.installer.validation.dialog;
+	exports com.epau.installer;
 
 }
