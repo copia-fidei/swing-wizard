@@ -21,7 +21,6 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 @NonNls
 interface StatusBarDemo {
 
-
 	static void main() {
 		invokeLater(() -> {
 			var frame         = new JFrame("Toast"); //NON-NLS

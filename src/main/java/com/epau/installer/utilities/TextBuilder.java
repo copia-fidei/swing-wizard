@@ -2,9 +2,7 @@ package com.epau.installer.utilities;
 
 import static java.lang.System.lineSeparator;
 
-/**
- * Similar to a string builder, but each appended string is in a new line.
- */
+/// Similar to a string builder, but each appended string is placed on a new line.
 public record TextBuilder(StringBuilder builder) {
 
 	public TextBuilder() {

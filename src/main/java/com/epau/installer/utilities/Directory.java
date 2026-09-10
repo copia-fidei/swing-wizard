@@ -23,7 +23,6 @@ public class Directory {
 
 	private final Path directory;
 
-
 	public Directory(Path directory) {
 		this.directory = directory;
 

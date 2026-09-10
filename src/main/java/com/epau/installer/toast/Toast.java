@@ -4,7 +4,12 @@ import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.WEST;
@@ -18,7 +23,8 @@ public class Toast extends JPanel {
 
 	private final JLabel iconLabel = new JLabel();
 	private final JLabel textLabel = new JLabel();
-	private       Color  color;
+
+	private Color color;
 
 	public Toast() {
 		setBorder(createEmptyBorder(5, 5, 5, 5));
@@ -30,12 +36,10 @@ public class Toast extends JPanel {
 		textLabel.setOpaque(false);
 	}
 
-
 	public void display(Icon icon, String message, Color color) {
 		this.color = color;
-		message = message + " ";
 		iconLabel.setIcon(icon);
-		textLabel.setText(message);
+		textLabel.setText(message + " ");
 		textLabel.setForeground(color);
 		repaint();
 		setVisible(true);

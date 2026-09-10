@@ -52,14 +52,12 @@ public abstract class Page {
 
 	protected final Runnable onValidationChanged;
 
-
 	public Page(PageData pageData, Runnable onValidationChanged) {
 		this.pageData = pageData;
 		this.onValidationChanged = onValidationChanged;
 
 		statusBar.toast().setVisible(false);
 	}
-
 
 	public boolean isValid() {
 		return isValid;
@@ -76,7 +74,6 @@ public abstract class Page {
 		});
 	}
 
-
 	private void validate() {
 		isValid = false;
 		if (!validator.isDone()) {
@@ -86,13 +83,11 @@ public abstract class Page {
 		validator.execute();
 	}
 
-
 	public abstract void build();
 
 	protected abstract void addListeners();
 
 	protected abstract void removeListeners();
-
 
 	public void willBecomeVisible() {
 		pageData.load();
@@ -162,7 +157,6 @@ public abstract class Page {
 			}
 		}
 
-
 		@Override
 		public void paint(Graphics g, JComponent c) {
 			super.paint(g, c);
@@ -200,7 +194,6 @@ public abstract class Page {
 		}
 	}
 
-
 	@Override
 	public String toString() {
 		return getTitle();
@@ -219,7 +212,6 @@ public abstract class Page {
 			if (isCancelled()) {
 				return;
 			}
-
 			try {
 				latestValidationResults = get();
 				if (latestValidationResults.contains(ERROR)) {
