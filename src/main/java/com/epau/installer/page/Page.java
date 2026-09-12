@@ -1,7 +1,7 @@
 package com.epau.installer.page;
 
-import com.epau.installer.toast.StatusBar;
-import com.epau.installer.toast.Toast;
+import com.epau.utilities.swing.toast.StatusBar;
+import com.epau.utilities.swing.toast.Toast;
 import com.epau.library.validation.ValidationResults;
 import com.epau.library.validation.dialog.ValidationResultsDialog;
 import org.jetbrains.annotations.NonNls;
