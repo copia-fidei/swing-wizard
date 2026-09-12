@@ -20,9 +20,6 @@ module com.epau.installer {
 
 	exports com.epau.installer.apply;
 	exports com.epau.installer.page;
-	exports com.epau.installer.utilities;
 	exports com.epau.installer;
-
-
 
 }
