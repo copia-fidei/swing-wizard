@@ -44,12 +44,22 @@
         </dependency>
         <dependency>
             <groupId>com.epau.utilities.swing</groupId>
+            <artifactId>swing-utilities</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epau.utilities.swing</groupId>
             <artifactId>swing-operation</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.epau.utilities</groupId>
             <artifactId>nls</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epau.library.validation</groupId>
+            <artifactId>validation-library</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>

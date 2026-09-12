@@ -1,7 +1,7 @@
 package com.epau.installer.apply;
 
-import com.epau.installer.swing.TestFrames;
 import com.epau.utilities.swing.operation.examples.WaitOperation;
+import com.epau.utilities.swing.frame.TestFrames;
 import org.jetbrains.annotations.NonNls;
 
 

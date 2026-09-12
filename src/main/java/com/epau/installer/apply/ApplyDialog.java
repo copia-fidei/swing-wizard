@@ -1,7 +1,5 @@
 package com.epau.installer.apply;
 
-
-
 import com.epau.utilities.nls.Nls;
 import com.epau.utilities.swing.operation.Operation;
 import com.epau.utilities.swing.operation.OperationStatus;

@@ -1,7 +1,7 @@
 package com.epau.installer.page;
 
-import com.epau.installer.swing.TestFrames;
 import com.epau.utilities.nls.Nls;
+import com.epau.utilities.swing.frame.TestFrames;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -64,6 +64,6 @@ public class ButtonBar extends JPanel {
 
 	// Demo
 	void main() {
-		TestFrames.showComponent("Buttons Bar", new ButtonBar()); //$NON-NLS
+		TestFrames.showComponent("Button Bar", new ButtonBar()); //$NON-NLS
 	}
 }
