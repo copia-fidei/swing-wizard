@@ -1,4 +1,4 @@
-package com.epau.installer.apply;
+package com.epau.lib.swing.installer.apply;
 
 import javax.swing.Icon;
 import javax.swing.JProgressBar;

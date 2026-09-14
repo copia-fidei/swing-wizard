@@ -1,19 +1,18 @@
-package com.epau.installer.apply;
+package com.epau.lib.swing.installer.apply;
 
-import com.epau.installer.Icons;
-import com.epau.utilities.nls.Nls;
-import com.epau.utilities.swing.operation.Operation;
-import com.epau.utilities.swing.operation.OperationAdapter;
-import com.epau.utilities.swing.operation.OperationListener;
-import com.epau.utilities.swing.operation.OperationStatus;
+import com.epau.lib.swing.installer.Icons;
+import com.epau.util.nls.Nls;
+import com.epau.util.swing.operation.Operation;
+import com.epau.util.swing.operation.OperationAdapter;
+import com.epau.util.swing.operation.OperationStatus;
+import com.epau.util.swing.button.SvgButton;
 
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
 
-import static com.epau.utilities.swing.operation.OperationStatusPresentation.getDescription;
+import static com.epau.util.swing.operation.OperationStatusPresentation.getDescription;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 import static javax.swing.JOptionPane.YES_OPTION;
 import static javax.swing.JOptionPane.showConfirmDialog;
@@ -24,7 +23,7 @@ public class ProgressSegment extends JPanel {
 
 	private final Nls                 nls           = new Nls(this);
 	private final Operation           operation;
-	private final JButton             cancelButton  = new SVGButton(Icons.CANCEL_ICON_PATH, 20);
+	private final JButton             cancelButton  = new SvgButton(Icons.CANCEL_ICON_PATH, 20);
 	private final ProgressBarWithIcon progressBar   = new ProgressBarWithIcon();
 	private final JButton             detailsButton = new JButton("...");
 
@@ -54,8 +53,7 @@ public class ProgressSegment extends JPanel {
 					nls.get("ProgressSegment.description.Should_this_operation_really_be_cancelled?"),
 					nls.get("ProgressSegment.title.Should_this_operations_really_be_cancelled?"),
 					YES_NO_OPTION) == YES_OPTION
-			)
-			{
+			) {
 				operation.cancel(true);
 			}
 		});

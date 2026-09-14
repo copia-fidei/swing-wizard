@@ -1,9 +1,9 @@
-package com.epau.installer.page;
+package com.epau.lib.swing.installer.page;
 
-import com.epau.utilities.swing.toast.StatusBar;
-import com.epau.utilities.swing.toast.Toast;
-import com.epau.library.validation.ValidationResults;
-import com.epau.library.validation.dialog.ValidationResultsDialog;
+import com.epau.util.swing.toast.StatusBar;
+import com.epau.util.swing.toast.Toast;
+import com.epau.lib.validation.ValidationResults;
+import com.epau.lib.validation.dialog.ValidationResultsDialog;
 import org.jetbrains.annotations.NonNls;
 
 import javax.swing.JComponent;
@@ -23,9 +23,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.epau.library.validation.Severity.ERROR;
-import static com.epau.library.validation.Severity.INFO;
-import static com.epau.library.validation.Severity.WARNING;
+import static com.epau.lib.validation.Severity.ERROR;
+import static com.epau.lib.validation.Severity.INFO;
+import static com.epau.lib.validation.Severity.WARNING;
 import static java.awt.AWTEvent.MOUSE_EVENT_MASK;
 import static java.awt.AWTEvent.MOUSE_MOTION_EVENT_MASK;
 import static java.awt.Cursor.HAND_CURSOR;

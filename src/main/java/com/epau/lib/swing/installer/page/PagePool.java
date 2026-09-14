@@ -1,7 +1,7 @@
-package com.epau.installer.page;
+package com.epau.lib.swing.installer.page;
 
-import com.epau.installer.apply.ApplyDialog;
-import com.epau.utilities.swing.operation.Operation;
+import com.epau.lib.swing.installer.apply.ApplyDialog;
+import com.epau.util.swing.operation.Operation;
 import org.jetbrains.annotations.NonNls;
 
 import java.awt.Dimension;

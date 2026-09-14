@@ -1,8 +1,8 @@
-package com.epau.installer.apply;
+package com.epau.lib.swing.installer.apply;
 
-import com.epau.utilities.nls.Nls;
-import com.epau.utilities.swing.operation.Operation;
-import com.epau.utilities.swing.operation.OperationStatus;
+import com.epau.util.nls.Nls;
+import com.epau.util.swing.operation.Operation;
+import com.epau.util.swing.operation.OperationStatus;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;

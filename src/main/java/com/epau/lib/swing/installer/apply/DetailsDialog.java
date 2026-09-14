@@ -1,10 +1,10 @@
-package com.epau.installer.apply;
+package com.epau.lib.swing.installer.apply;
 
 
-import com.epau.utilities.nls.Nls;
-import com.epau.utilities.swing.operation.Operation;
-import com.epau.utilities.swing.operation.OperationListener;
-import com.epau.utilities.swing.operation.OperationStatus;
+import com.epau.util.nls.Nls;
+import com.epau.util.swing.operation.Operation;
+import com.epau.util.swing.operation.OperationListener;
+import com.epau.util.swing.operation.OperationStatus;
 import org.jetbrains.annotations.NonNls;
 
 import javax.swing.BoxLayout;
@@ -23,8 +23,8 @@ import java.awt.Insets;
 import java.awt.Window;
 import java.util.List;
 
-import static com.epau.utilities.swing.operation.OperationStatusPresentation.getDescription;
-import static com.epau.utilities.swing.operation.OperationStatusPresentation.getIcon;
+import static com.epau.util.swing.operation.OperationStatusPresentation.getDescription;
+import static com.epau.util.swing.operation.OperationStatusPresentation.getIcon;
 import static java.awt.Font.PLAIN;
 import static java.awt.GridBagConstraints.BOTH;
 import static java.awt.GridBagConstraints.HORIZONTAL;

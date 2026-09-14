@@ -1,9 +1,9 @@
-package com.epau.installer.apply;
+package com.epau.lib.swing.installer.apply;
 
-import com.epau.utilities.swing.frame.TestFrames;
-import com.epau.utilities.swing.operation.Operation;
-import com.epau.utilities.swing.operation.examples.BlockingOperation;
-import com.epau.utilities.swing.operation.examples.WaitOperation;
+import com.epau.util.swing.frame.TestFrames;
+import com.epau.util.swing.operation.Operation;
+import com.epau.util.swing.operation.examples.BlockingOperation;
+import com.epau.util.swing.operation.examples.WaitOperation;
 import org.jetbrains.annotations.NonNls;
 
 import java.util.List;

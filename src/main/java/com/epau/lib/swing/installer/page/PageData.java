@@ -1,6 +1,6 @@
-package com.epau.installer.page;
+package com.epau.lib.swing.installer.page;
 
-import com.epau.library.validation.ValidationResults;
+import com.epau.lib.validation.ValidationResults;
 import org.jetbrains.annotations.NonNls;
 
 import java.util.logging.Logger;

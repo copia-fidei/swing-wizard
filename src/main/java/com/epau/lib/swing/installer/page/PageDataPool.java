@@ -1,4 +1,4 @@
-package com.epau.installer.page;
+package com.epau.lib.swing.installer.page;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.epau.installer.page;
+package com.epau.lib.swing.installer.page;
 
-import com.epau.utilities.nls.Nls;
-import com.epau.utilities.swing.frame.TestFrames;
+import com.epau.util.nls.Nls;
+import com.epau.util.swing.frame.TestFrames;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;

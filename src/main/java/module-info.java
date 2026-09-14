@@ -1,4 +1,4 @@
-module com.epau.installer {
+module com.epau.lib.swing.installer {
 	requires java.desktop;
 	requires java.prefs;
 	requires java.logging;
@@ -8,18 +8,18 @@ module com.epau.installer {
 	requires static org.jetbrains.annotations;
 	requires org.apache.commons.compress;
 
-	requires transitive com.epau.utilities.swing.operation;
-	requires transitive com.epau.library.validation;
-	requires com.epau.utilities.swing;
-	requires com.epau.utilities.nls;
+	requires transitive com.epau.util.swing.operation;
+	requires transitive com.epau.lib.validation;
+	requires com.epau.util.swing;
+	requires com.epau.util.nls;
 
-	opens com.epau.installer.apply to com.epau.utilities.nls;
-	opens com.epau.installer.page to com.epau.utilities.nls;
+	opens com.epau.lib.swing.installer.apply to com.epau.util.nls;
+	opens com.epau.lib.swing.installer.page to com.epau.util.nls;
 
-	opens com.epau.installer.icons.svgrepo;
+	opens com.epau.lib.swing.installer.icons.svgrepo;
 
-	exports com.epau.installer.apply;
-	exports com.epau.installer.page;
-	exports com.epau.installer;
+	exports com.epau.lib.swing.installer.apply;
+	exports com.epau.lib.swing.installer.page;
+	exports com.epau.lib.swing.installer;
 
 }
