@@ -1,4 +1,4 @@
-package com.epau.lib.swing.installer.page;
+package com.epau.lib.swing.wizard.page;
 
 import com.epau.util.nls.Nls;
 import com.epau.util.swing.frame.TestFrames;

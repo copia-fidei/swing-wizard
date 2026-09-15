@@ -1,4 +1,4 @@
-package com.epau.lib.swing.installer.apply;
+package com.epau.lib.swing.wizard.apply;
 
 import com.epau.util.swing.operation.examples.WaitOperation;
 import com.epau.util.swing.frame.TestFrames;

@@ -1,6 +1,6 @@
-package com.epau.lib.swing.installer.page;
+package com.epau.lib.swing.wizard.page;
 
-import com.epau.lib.swing.installer.apply.ApplyDialog;
+import com.epau.lib.swing.wizard.apply.ApplyDialog;
 import com.epau.util.swing.operation.Operation;
 import org.jetbrains.annotations.NonNls;
 

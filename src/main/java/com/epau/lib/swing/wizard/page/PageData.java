@@ -1,4 +1,4 @@
-package com.epau.lib.swing.installer.page;
+package com.epau.lib.swing.wizard.page;
 
 import com.epau.lib.validation.ValidationResults;
 import org.jetbrains.annotations.NonNls;

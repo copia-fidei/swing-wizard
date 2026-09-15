@@ -1,4 +1,4 @@
-package com.epau.lib.swing.installer;
+package com.epau.lib.swing.wizard;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.extras.FlatSVGIcon.ColorFilter;
@@ -10,7 +10,7 @@ import java.awt.Color;
 @NonNls
 public interface Icons {
 
-	String CANCEL_ICON_PATH    = "com/epau/lib/swing/installer/icons/svgrepo/cancel-svgrepo-com.svg";
+	String CANCEL_ICON_PATH    = "com/epau/lib/swing/wizard/icons/svgrepo/cancel-svgrepo-com.svg";
 
 	static FlatSVGIcon cancel(int size) {
 		return newIcon(CANCEL_ICON_PATH, Color.RED, size);

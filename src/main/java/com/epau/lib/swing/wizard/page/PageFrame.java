@@ -1,4 +1,4 @@
-package com.epau.lib.swing.installer.page;
+package com.epau.lib.swing.wizard.page;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;

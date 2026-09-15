@@ -1,4 +1,4 @@
-module com.epau.lib.swing.installer {
+module com.epau.lib.swing.wizard {
 	requires java.desktop;
 	requires java.prefs;
 	requires java.logging;
@@ -13,13 +13,13 @@ module com.epau.lib.swing.installer {
 	requires com.epau.util.swing;
 	requires com.epau.util.nls;
 
-	opens com.epau.lib.swing.installer.apply to com.epau.util.nls;
-	opens com.epau.lib.swing.installer.page to com.epau.util.nls;
+	opens com.epau.lib.swing.wizard.apply to com.epau.util.nls;
+	opens com.epau.lib.swing.wizard.page to com.epau.util.nls;
 
-	opens com.epau.lib.swing.installer.icons.svgrepo;
+	opens com.epau.lib.swing.wizard.icons.svgrepo;
 
-	exports com.epau.lib.swing.installer.apply;
-	exports com.epau.lib.swing.installer.page;
-	exports com.epau.lib.swing.installer;
+	exports com.epau.lib.swing.wizard.apply;
+	exports com.epau.lib.swing.wizard.page;
+	exports com.epau.lib.swing.wizard;
 
 }

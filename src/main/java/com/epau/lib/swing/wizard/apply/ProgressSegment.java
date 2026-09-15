@@ -1,6 +1,6 @@
-package com.epau.lib.swing.installer.apply;
+package com.epau.lib.swing.wizard.apply;
 
-import com.epau.lib.swing.installer.Icons;
+import com.epau.lib.swing.wizard.Icons;
 import com.epau.util.nls.Nls;
 import com.epau.util.swing.operation.Operation;
 import com.epau.util.swing.operation.OperationAdapter;
