@@ -76,6 +76,7 @@ public abstract class Page {
 
 	private void validate() {
 		isValid = false;
+		onValidationChanged.run();
 		if (!validator.isDone()) {
 			validator.cancel(true);
 		}
