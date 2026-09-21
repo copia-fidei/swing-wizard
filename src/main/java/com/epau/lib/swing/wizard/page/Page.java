@@ -1,5 +1,6 @@
 package com.epau.lib.swing.wizard.page;
 
+import com.epau.util.swing.evt.Listeners;
 import com.epau.util.swing.toast.StatusBar;
 import com.epau.util.swing.toast.Toast;
 import com.epau.lib.validation.ValidationResults;
@@ -9,16 +10,13 @@ import org.jetbrains.annotations.NonNls;
 import javax.swing.JComponent;
 import javax.swing.JLayer;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.plaf.LayerUI;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +30,9 @@ import static java.awt.Cursor.HAND_CURSOR;
 import static java.awt.Cursor.getDefaultCursor;
 import static java.awt.event.MouseEvent.MOUSE_CLICKED;
 import static java.util.logging.Logger.getLogger;
+import static javax.swing.SwingUtilities.invokeLater;
 import static javax.swing.SwingUtilities.windowForComponent;
+
 
 @NonNls
 public abstract class Page {
@@ -40,34 +40,26 @@ public abstract class Page {
 	protected final Logger log = getLogger(getClass().getName());
 
 	protected final PageData pageData;
+	/// the panel to add all the GUI components to
 	protected final JPanel   content = new JPanel(new GridBagLayout());
-
-	protected boolean isValid;
 
 	private final StatusBar      statusBar      = new StatusBar();
 	private final JLayer<JPanel> statusBarLayer = new JLayer<>(content, new ToastLayerUI());
 
-	private ValidationResults                    latestValidationResults = new ValidationResults(List.of());
+	private ValidationResults                    latestValidationResults = new ValidationResults();
 	private SwingWorker<ValidationResults, Void> validator               = new Validator();
 
-	protected final Runnable onValidationChanged;
-
-	public Page(PageData pageData, Runnable onValidationChanged) {
+	public Page(PageData pageData) {
 		this.pageData = pageData;
-		this.onValidationChanged = onValidationChanged;
-
 		statusBar.toast().setVisible(false);
 	}
 
-	public boolean isValid() {
-		return isValid;
-	}
-
+	/// GUI components should call this method, if their state changes.
 	protected final void pageChanged() {
 		removeListeners();
 		updatePageData();
 		validate();
-		SwingUtilities.invokeLater(() -> {
+		invokeLater(() -> {
 			updateGUI();
 			updateDependantValues();
 			addListeners();
@@ -75,8 +67,7 @@ public abstract class Page {
 	}
 
 	private void validate() {
-		isValid = false;
-		onValidationChanged.run();
+		fireValidationStarted();
 		if (!validator.isDone()) {
 			validator.cancel(true);
 		}
@@ -84,12 +75,23 @@ public abstract class Page {
 		validator.execute();
 	}
 
+	protected void fireValidationStarted() {
+		validationListeners.fire(listener -> listener.validationStarted(this));
+	}
+
+	private void fireValidationFinished() {
+		validationListeners.fire(listener -> listener.validationFinished(Page.this, latestValidationResults));
+	}
+
 	public abstract void build();
 
+	/// add listeners for all the components that are on this page
 	protected abstract void addListeners();
 
+	/// remove listeners from all the components that are on this page
 	protected abstract void removeListeners();
 
+	/// Called when this page is about to become visible
 	public void willBecomeVisible() {
 		pageData.load();
 		fillGUI();
@@ -97,11 +99,13 @@ public abstract class Page {
 		validate();
 	}
 
+	/// Called when this page is about to become invisible
 	public void willBecomeInvisible() {
 		removeListeners();
 		pageData.save();
 	}
 
+	/// Each GUI component gets restored to its default value
 	public void restoreDefaults() {
 		removeListeners();
 		pageData.loadDefaults();
@@ -122,15 +126,25 @@ public abstract class Page {
 
 	public abstract String getDescription();
 
-	/// @return the page content
+	/// @return the panel with all GUI components
 	public JComponent getContent() {
 		return statusBarLayer;
+	}
+
+	private final Listeners<ValidationListener> validationListeners = Listeners.of();
+
+	public void addValidationListener(ValidationListener listener) {
+		validationListeners.add(listener);
+	}
+
+	public void removeValidationListener(ValidationListener listener) {
+		validationListeners.remove(listener);
 	}
 
 	@SuppressWarnings("rawtypes")
 	class ToastLayerUI extends LayerUI<JPanel> {
 
-		private static final int GAP = 20;
+		private static final int GAP_BETWEEN_TOAST_AND_BOTTOM = 20;
 
 		private boolean mouseIsInsideToast = false;
 
@@ -150,11 +164,10 @@ public abstract class Page {
 				mouseIsInsideToast = false;
 				return;
 			}
-			Rectangle bounds          = statusBar.toast().getBounds();
-			boolean   currentlyInside = bounds.contains(e.getPoint());
-			if (currentlyInside != mouseIsInsideToast) {
-				mouseIsInsideToast = currentlyInside;
-				layer.setCursor(currentlyInside ? new Cursor(HAND_CURSOR) : getDefaultCursor());
+			boolean mouseIsCurrentlyInsideToast = statusBar.toast().getBounds().contains(e.getPoint());
+			if (mouseIsCurrentlyInsideToast != mouseIsInsideToast) {
+				mouseIsInsideToast = mouseIsCurrentlyInsideToast;
+				layer.setCursor(mouseIsCurrentlyInsideToast ? new Cursor(HAND_CURSOR) : getDefaultCursor());
 			}
 		}
 
@@ -170,7 +183,7 @@ public abstract class Page {
 			var g2   = (Graphics2D) g.create();
 			var size = toast.getPreferredSize();
 			int x    = (c.getWidth() - size.width) / 2;
-			int y    = c.getHeight() - size.height - GAP;
+			int y    = c.getHeight() - size.height - GAP_BETWEEN_TOAST_AND_BOTTOM;
 
 			toast.setBounds(x, y, size.width, size.height);
 			g2.translate(x, y);
@@ -226,10 +239,9 @@ public abstract class Page {
 				}
 				statusBarLayer.repaint();
 
-				isValid = !latestValidationResults.contains(ERROR);
-				onValidationChanged.run();
+				fireValidationFinished();
 			} catch (InterruptedException e) {
-				log.log(Level.WARNING, "Validation interrupted", e);
+				log.log(Level.INFO, "Validation interrupted", e);
 			} catch (ExecutionException e) {
 				log.log(Level.SEVERE, "Validation failed", e);
 			}

@@ -1,6 +1,8 @@
 package com.epau.lib.swing.wizard.page;
 
 import com.epau.lib.swing.wizard.apply.ApplyDialog;
+import com.epau.lib.validation.Severity;
+import com.epau.lib.validation.ValidationResults;
 import com.epau.util.swing.operation.Operation;
 import org.jetbrains.annotations.NonNls;
 
@@ -13,7 +15,7 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 
 @NonNls
-public abstract class PagePool {
+public abstract class PagePool implements ValidationListener {
 
 	protected final Logger log = getLogger(getClass().getName());
 
@@ -34,6 +36,7 @@ public abstract class PagePool {
 		addPages();
 		for (Page page : pages) {
 			page.build();
+			page.addValidationListener(this);
 		}
 		pageFrame.getPageTitleList().setListData(getPageTitles());
 		buttonBar.getCancelButton().addActionListener(_ -> pageFrame.dispose());
@@ -70,14 +73,15 @@ public abstract class PagePool {
 		updateButtons();
 	}
 
+
 	protected void updateButtons() {
 		int     index         = pages.indexOf(currentPage);
 		boolean isTheLastPage = (index >= pages.size() - 1);
 		if (isTheLastPage) {
 			buttonBar.getNextButton().setEnabled(false);
-			buttonBar.getApplyButton().setEnabled(currentPage.isValid());
+			buttonBar.getApplyButton().setEnabled(currentPageValid);
 		} else {
-			buttonBar.getNextButton().setEnabled(currentPage.isValid());
+			buttonBar.getNextButton().setEnabled(currentPageValid);
 			buttonBar.getApplyButton().setEnabled(false);
 		}
 		buttonBar.getBackButton().setEnabled(!(index <= 0));
@@ -119,6 +123,24 @@ public abstract class PagePool {
 		firstPage.getContent().setPreferredSize(getLargest());
 		switchPage(firstPage);
 		updateButtons();
+	}
+
+	private boolean currentPageValid;
+
+	@Override
+	public void validationStarted(Page page) {
+		if (page == currentPage) {
+			currentPageValid = false;
+			updateButtons();
+		}
+	}
+
+	@Override
+	public void validationFinished(Page page, ValidationResults results) {
+		if (page == currentPage) {
+			currentPageValid = !results.contains(Severity.ERROR);
+			updateButtons();
+		}
 	}
 
 	private Dimension getLargest() {
