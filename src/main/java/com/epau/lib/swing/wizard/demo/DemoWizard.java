@@ -8,8 +8,10 @@ import org.jetbrains.annotations.NonNls;
 
 import java.awt.Dimension;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Supplier;
 
+import static java.util.Locale.ENGLISH;
 import static javax.swing.SwingUtilities.invokeLater;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -17,6 +19,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 class DemoWizard {
 
 	static void main() {
+//		Locale.setDefault(ENGLISH);
 		invokeLater(() -> {
 			var frame = new PageFrame("Demo Wizard");
 			var pool  = new PagePool(frame) {

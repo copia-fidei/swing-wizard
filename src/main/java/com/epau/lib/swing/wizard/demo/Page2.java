@@ -105,7 +105,7 @@ class Page2 extends Page {
 
 	@Override
 	public String getTitle() {
-		return "Page 2";
+		return "Config page 2";
 	}
 
 	@Override
