@@ -13,7 +13,7 @@
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <flatlaf.version>3.7.2</flatlaf.version>
-        <demo.mainClass>com.epau.lib.swing.wizard.apply.ApplyDialogDemo</demo.mainClass>
+        <demo.mainClass>com.epau.lib.swing.wizard.demo.DemoWizard</demo.mainClass>
     </properties>
 
     <dependencies>
@@ -78,6 +78,20 @@
                         <argument>${demo.mainClass}</argument>
                     </arguments>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

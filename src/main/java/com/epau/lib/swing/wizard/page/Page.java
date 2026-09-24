@@ -34,6 +34,14 @@ import static javax.swing.SwingUtilities.invokeLater;
 import static javax.swing.SwingUtilities.windowForComponent;
 
 
+/// Displays the data from PageData and writes changes inside the GUI back to it.
+///
+/// Correct implementation (otherwise bugs appear)
+/// 1. Implement all methods as documented.
+/// 2. Do not add listeners to components that update other components.
+/// Instead, do this:
+/// Add listeners to components that only call pageChanged(), by implementing addListeners() and removeListeners().
+/// Query the state of each components in updateGUI() and updateDependantValues() and update the GUI accordingly.
 @NonNls
 public abstract class Page {
 
@@ -54,7 +62,9 @@ public abstract class Page {
 		statusBar.toast().setVisible(false);
 	}
 
-	/// GUI components should call this method, if their state changes.
+	/// Called when the state of a GUI component changes.
+	/// How to use:
+	/// Add to each component a listener that calls this method (use addListeners and removeListeners)
 	protected final void pageChanged() {
 		removeListeners();
 		updatePageData();
@@ -83,13 +93,6 @@ public abstract class Page {
 		validationListeners.fire(listener -> listener.validationFinished(Page.this, latestValidationResults));
 	}
 
-	public abstract void build();
-
-	/// add listeners for all the components that are on this page
-	protected abstract void addListeners();
-
-	/// remove listeners from all the components that are on this page
-	protected abstract void removeListeners();
 
 	/// Called when this page is about to become visible
 	public void willBecomeVisible() {
@@ -114,13 +117,28 @@ public abstract class Page {
 		addListeners();
 	}
 
+	/// Build the GUI, but do not fill it with data from PageData.
+	/// Components should be added to the *content* panel.
+	public abstract void build();
+
+	/// Fill the GUI components with values from PageData.
 	protected abstract void fillGUI();
 
+	/// Write the current data inside the GUI to PageData.
 	protected abstract void updatePageData();
 
+	/// Update the GUI.
 	public abstract void updateGUI();
 
+	/// Update the values inside GUI components that depend on the values of other components.
 	public abstract void updateDependantValues();
+
+	/// Add listeners for all components on this page.
+	protected abstract void addListeners();
+
+	/// Remove listeners from all components on this page.
+	/// Not implementing this correctly will lead to endless event loops.
+	protected abstract void removeListeners();
 
 	public abstract String getTitle();
 

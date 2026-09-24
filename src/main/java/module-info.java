@@ -21,5 +21,6 @@ module com.epau.lib.swing.wizard {
 	exports com.epau.lib.swing.wizard.apply;
 	exports com.epau.lib.swing.wizard.page;
 	exports com.epau.lib.swing.wizard;
+	exports com.epau.lib.swing.wizard.demo;
 
 }

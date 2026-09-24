@@ -14,6 +14,19 @@ import java.util.logging.Logger;
 
 import static java.util.logging.Logger.getLogger;
 
+/// Manages all pages and navigation between them.
+///
+/// How to implement:
+/// 1. Instantiate all pairs of PageData and page object and add them inside `addPages`.
+/// 2. Provide operations inside `getOperations`.
+///
+/// This class is also the entry point of the wizard.
+/// The main routine is:
+/// 1. Instantiate PageFrame
+/// 2. Instantiate PagePool (your overriding implementation). Provide it with PageFrame.
+/// 3. PagePool.init()
+/// 4. PagePool.showFirstPage()
+/// 5. On PageFrame: set size, location and finally call `setVisible(true)`
 @NonNls
 public abstract class PagePool implements ValidationListener {
 
@@ -46,13 +59,15 @@ public abstract class PagePool implements ValidationListener {
 		buttonBar.getApplyButton().addActionListener(_ -> new ApplyDialog(pageFrame, operations()).setVisible(true));
 	}
 
-
-	private List<Operation> operations() {
-		return getOperations().stream().map(Supplier::get).toList();
-	}
-
-	private String[] getPageTitles() {
-		return pages.stream().map(Page::getTitle).toArray(String[]::new);
+	public void showFirstPage() {
+		if (pages.isEmpty()) {
+			log.info("pages is empty");
+			return;
+		}
+		var firstPage = pages.getFirst();
+		firstPage.getContent().setPreferredSize(getLargest());
+		switchPage(firstPage);
+		updateButtons();
 	}
 
 	/// Create PageData and Page objects and add them.
@@ -71,20 +86,6 @@ public abstract class PagePool implements ValidationListener {
 		Page nextPage = pages.get(currentIndex + 1);
 		switchPage(nextPage);
 		updateButtons();
-	}
-
-
-	protected void updateButtons() {
-		int     index         = pages.indexOf(currentPage);
-		boolean isTheLastPage = (index >= pages.size() - 1);
-		if (isTheLastPage) {
-			buttonBar.getNextButton().setEnabled(false);
-			buttonBar.getApplyButton().setEnabled(currentPageValid);
-		} else {
-			buttonBar.getNextButton().setEnabled(currentPageValid);
-			buttonBar.getApplyButton().setEnabled(false);
-		}
-		buttonBar.getBackButton().setEnabled(!(index <= 0));
 	}
 
 	public void back() {
@@ -113,16 +114,17 @@ public abstract class PagePool implements ValidationListener {
 		pageFrame.showPage(newPage);
 	}
 
-
-	public void showFirstPage() {
-		if (pages.isEmpty()) {
-			log.info("pages is empty");
-			return;
+	protected void updateButtons() {
+		int     index         = pages.indexOf(currentPage);
+		boolean isTheLastPage = (index >= pages.size() - 1);
+		if (isTheLastPage) {
+			buttonBar.getNextButton().setEnabled(false);
+			buttonBar.getApplyButton().setEnabled(currentPageValid);
+		} else {
+			buttonBar.getNextButton().setEnabled(currentPageValid);
+			buttonBar.getApplyButton().setEnabled(false);
 		}
-		var firstPage = pages.getFirst();
-		firstPage.getContent().setPreferredSize(getLargest());
-		switchPage(firstPage);
-		updateButtons();
+		buttonBar.getBackButton().setEnabled(!(index <= 0));
 	}
 
 	private boolean currentPageValid;
@@ -155,5 +157,13 @@ public abstract class PagePool implements ValidationListener {
 			}
 		}
 		return biggest;
+	}
+
+	private List<Operation> operations() {
+		return getOperations().stream().map(Supplier::get).toList();
+	}
+
+	private String[] getPageTitles() {
+		return pages.stream().map(Page::getTitle).toArray(String[]::new);
 	}
 }

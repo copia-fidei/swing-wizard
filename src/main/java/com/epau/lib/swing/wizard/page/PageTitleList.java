@@ -7,6 +7,7 @@ import java.awt.Component;
 
 import static javax.swing.BorderFactory.createMatteBorder;
 
+/// A overview of all pages.
 public class PageTitleList extends JList<String> {
 
 	public PageTitleList() {
