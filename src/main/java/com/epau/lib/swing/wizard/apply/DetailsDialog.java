@@ -23,6 +23,7 @@ import java.awt.Insets;
 import java.awt.Window;
 import java.util.List;
 
+import static com.epau.util.swing.operation.OperationStatus.RUNNING;
 import static com.epau.util.swing.operation.OperationStatusPresentation.getDescription;
 import static com.epau.util.swing.operation.OperationStatusPresentation.getIcon;
 import static java.awt.Font.PLAIN;
@@ -48,7 +49,7 @@ public class DetailsDialog extends JDialog {
 	private final JButton   closeButton      = new JButton(nls.get("DetailsDialog.button.Close"));
 
 	public DetailsDialog(Window parent, Operation operation) {
-		super(parent, operation.getTitle());
+		super(parent, operation.title());
 		this.operation = operation;
 
 		buildGUI();
@@ -68,13 +69,13 @@ public class DetailsDialog extends JDialog {
 		var separator             = new JSeparator(SwingConstants.HORIZONTAL);
 		var buttonPanel           = new JPanel();
 
-		descriptionTextArea.setText(operation.getDescription());
+		descriptionTextArea.setText(operation.description());
 		descriptionTextArea.setEditable(false);
 		descriptionTextArea.setWrapStyleWord(true);
 		descriptionTextArea.setLineWrap(true);
 		statusLabel.setFont(statusTitleLabel.getFont().deriveFont(PLAIN));
 		progressTextArea.setEditable(false);
-		cancelButton.setToolTipText(nls.get("DetailsDialog.tooltip.Cancel_{0}", operation.getTitle()));
+		cancelButton.setToolTipText(nls.get("DetailsDialog.tooltip.Cancel_{0}", operation.title()));
 		closeButton.setToolTipText(nls.get("DetailsDialog.tooltip.Close_the_dialog"));
 
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
@@ -125,14 +126,14 @@ public class DetailsDialog extends JDialog {
 	}
 
 	private void updateUI() {
-		OperationStatus status = operation.getStatus();
+		OperationStatus status = operation.status();
 		statusLabel.setIcon(getIcon(status));
 		statusLabel.setText(getDescription(status));
 
-		progressTextArea.setText(getText(operation.getLogs()));
+		progressTextArea.setText(getText(operation.logs()));
 		progressTextArea.setCaretPosition(progressTextArea.getDocument().getLength());
 
-		cancelButton.setEnabled(status == OperationStatus.RUNNING);
+		cancelButton.setEnabled(status == RUNNING);
 	}
 
 	// An improvement could be to use jediterm

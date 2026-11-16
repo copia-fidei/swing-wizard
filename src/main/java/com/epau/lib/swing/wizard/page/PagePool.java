@@ -33,16 +33,15 @@ public abstract class PagePool implements ValidationListener {
 	protected final Logger log = getLogger(getClass().getName());
 
 	protected final List<Page>   pages = new ArrayList<>();
+	protected final PageDataPool pageDataPool = new PageDataPool();
 	protected final PageFrame    pageFrame;
-	protected final PageDataPool pageDataPool;
 	protected final ButtonBar    buttonBar;
 
 	private Page currentPage;
 
 	public PagePool(PageFrame pageFrame) {
-		this.pageFrame = pageFrame;
-		this.buttonBar = pageFrame.getButtonBar();
-		this.pageDataPool = new PageDataPool();
+		this.pageFrame    = pageFrame;
+		this.buttonBar    = pageFrame.getButtonBar();
 	}
 
 	public void init() {
@@ -165,5 +164,9 @@ public abstract class PagePool implements ValidationListener {
 
 	private String[] getPageTitles() {
 		return pages.stream().map(Page::getTitle).toArray(String[]::new);
+	}
+
+	public PageDataPool getPageDataPool() {
+		return pageDataPool;
 	}
 }

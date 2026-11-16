@@ -1,6 +1,7 @@
 package com.epau.lib.swing.wizard.page;
 
 import com.epau.util.swing.evt.Listeners;
+import com.epau.util.swing.text.DocumentChangeListener;
 import com.epau.util.swing.toast.StatusBar;
 import com.epau.util.swing.toast.Toast;
 import com.epau.lib.validation.ValidationResults;
@@ -15,7 +16,10 @@ import javax.swing.plaf.LayerUI;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -40,8 +44,9 @@ import static javax.swing.SwingUtilities.windowForComponent;
 /// 1. Implement all methods as documented.
 /// 2. Do not add listeners to components that update other components.
 /// Instead, do this:
-/// Add listeners to components that only call pageChanged(), by implementing addListeners() and removeListeners().
-/// Query the state of each components in updateGUI() and updateDependantValues() and update the GUI accordingly.
+/// Add listeners to components inside addListeners() and remove them in removeListeners();
+/// the listeners should only call pageChanged().
+/// Query the state of each component in updateGUI() and updateDependantValues() and update the GUI accordingly.
 @NonNls
 public abstract class Page {
 
@@ -83,6 +88,10 @@ public abstract class Page {
 		}
 		validator = new Validator();
 		validator.execute();
+	}
+
+	protected void add(JComponent component, int gridx, int gridy, int gridwidth, int gridheight, double weightx, double weighty, int anchor, int fill, int top, int left, int bottom, int right, int ipadx, int ipady) {
+		content.add(component, new GridBagConstraints(gridx, gridy, gridwidth, gridheight, weightx, weighty, anchor, fill, new Insets(top, left, bottom, right), ipadx, ipady));
 	}
 
 	protected void fireValidationStarted() {
@@ -265,4 +274,9 @@ public abstract class Page {
 			}
 		}
 	}
+
+	// Reusable listener
+	protected final ItemListener           itemListener     = _ -> pageChanged();
+	protected final DocumentChangeListener documentListener = new DocumentChangeListener(this::pageChanged);
+
 }

@@ -8,6 +8,10 @@ public class NoOpPageData extends PageData {
 		super(pageDataPool);
 	}
 
+	public NoOpPageData() {
+		super();
+	}
+
 	@Override
 	public void load() {}
 

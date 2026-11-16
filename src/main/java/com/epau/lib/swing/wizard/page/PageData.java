@@ -21,11 +21,18 @@ public abstract class PageData {
 
     protected Preferences preferences = userNodeForPackage(this.getClass());
 
+	/// obtain the other page data objects from here
+	/// you don't have to pass it into the constructor if you do not need it
     protected PageDataPool pageDataPool;
 
     public PageData(PageDataPool pageDataPool) {
         this.pageDataPool = pageDataPool;
 	}
+
+	public PageData() {
+		this.pageDataPool = null;
+	}
+
 
     public abstract void load();
 

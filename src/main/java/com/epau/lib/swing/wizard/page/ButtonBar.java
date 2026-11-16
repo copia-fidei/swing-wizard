@@ -13,23 +13,41 @@ import static javax.swing.BoxLayout.LINE_AXIS;
 
 public class ButtonBar extends JPanel {
 
+	/// names to identify components
+	public interface Name {
+		String CANCEL = "button.cancel";
+		String DEFAULTS = "button.defaults";
+		String BACK     = "button.back";
+		String NEXT = "button.next";
+		String APPLY = "button.apply";
+	}
+
 	private static final Nls nls = new Nls(ButtonBar.class);
 
-	// Button titles
-	public static final String  CANCEL         = nls.get("ButtonBar.Cancel");
-	public static final String  DEFAULTS       = nls.get("ButtonBar.Defaults");
-	public static final String  BACK           = "←";
-	public static final String  NEXT           = "→";
-	public static final String  APPLY          = nls.get("ButtonBar.Apply");
+	/// button titles
+	public interface Title {
+		String CANCEL   = nls.get("ButtonBar.Cancel");
+		String DEFAULTS = nls.get("ButtonBar.Defaults");
+		String BACK     = "←";
+		String NEXT     = "→";
+		String APPLY    = nls.get("ButtonBar.Apply");
+	}
 
-	private final JButton cancelButton   = new JButton(CANCEL);
-	private final JButton defaultsButton = new JButton(DEFAULTS);
-	private final JButton backButton     = new JButton(BACK);
-	private final JButton nextButton     = new JButton(NEXT);
-	private final JButton applyButton    = new JButton(APPLY);
+
+	private final JButton cancelButton   = new JButton(Title.CANCEL);
+	private final JButton defaultsButton = new JButton(Title.DEFAULTS);
+	private final JButton backButton     = new JButton(Title.BACK);
+	private final JButton nextButton     = new JButton(Title.NEXT);
+	private final JButton applyButton    = new JButton(Title.APPLY);
 
 	public ButtonBar() {
 		setLayout(new BoxLayout(this, LINE_AXIS));
+
+		cancelButton.setName(Name.CANCEL);
+		defaultsButton.setName(Name.DEFAULTS);
+		backButton.setName(Name.BACK);
+		nextButton.setName(Name.NEXT);
+		applyButton.setName(Name.APPLY);
 
 		add(cancelButton);
 		add(createHorizontalStrut(10));

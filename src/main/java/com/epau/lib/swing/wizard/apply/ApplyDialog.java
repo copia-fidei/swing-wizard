@@ -59,7 +59,7 @@ public class ApplyDialog extends JDialog {
 		var emptyBorder = createEmptyBorder(10, 10, 10, 10);
 		scrollPane.setBorder(emptyBorder);
 		add(scrollPane);
-		descriptionTextArea.setText(operations.stream().map(Operation::getDescription).collect(joining("\n")));
+		descriptionTextArea.setText(operations.stream().map(Operation::description).collect(joining("\n")));
 		var progressPanel = new JPanel();
 		progressPanel.setLayout(new BoxLayout(progressPanel, Y_AXIS));
 		var progressScrollPane = new JScrollPane(progressPanel);
@@ -137,7 +137,7 @@ public class ApplyDialog extends JDialog {
 	}
 
 	private boolean isProcessing() {
-		return operations.stream().anyMatch(operation -> operation.getStatus() == OperationStatus.RUNNING);
+		return operations.stream().anyMatch(operation -> operation.status() == OperationStatus.RUNNING);
 	}
 
 	private final SwingWorker<Void, Void> operationsExecutor = new OperationsExecutor();

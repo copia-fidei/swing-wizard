@@ -9,13 +9,21 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import static java.awt.Color.WHITE;
+
 public class PageFrame extends JFrame {
+
+	/// names given to Swing components
+	public interface Name {
+
+		String PANEL_PAGE_CONTENT = "panel.pageContent";
+		String BUTTON_BAR         = "buttonBar";
+	}
 
 	private JPanel        content;
 	private PageTitleList pageTitleList;
@@ -32,8 +40,8 @@ public class PageFrame extends JFrame {
 
 	private void createUIComponents() {
 		pageTitleListScrollPane = new JScrollPane();
-		pageTitleListScrollPane.getViewport().setBackground(Color.WHITE);
-		pageTitleListScrollPane.setBackground(Color.WHITE);
+		pageTitleListScrollPane.getViewport().setBackground(WHITE);
+		pageTitleListScrollPane.setBackground(WHITE);
 		pageTitleListScrollPane.setViewportBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		pageTitleList = new PageTitleList();
 
@@ -41,7 +49,13 @@ public class PageFrame extends JFrame {
 		pageTitleListScrollPane.setPreferredSize(new Dimension(100, 0));
 		pageTitleListScrollPane.setMinimumSize(new Dimension(100, 0));
 		pageTitleListScrollPane.setMinimumSize(pageTitleListScrollPane.getPreferredSize());
-		pageTitleList.setBackground(Color.WHITE);
+		pageTitleList.setBackground(WHITE);
+
+		buttonBar = new ButtonBar();
+		buttonBar.setName(Name.BUTTON_BAR);
+
+		pageContent = new JPanel();
+		pageContent.setName(Name.PANEL_PAGE_CONTENT);
 	}
 
 	void showPage(Page page) {
@@ -87,7 +101,6 @@ public class PageFrame extends JFrame {
 		gbc.gridy = 1;
 		gbc.fill = GridBagConstraints.BOTH;
 		content.add(separator1, gbc);
-		pageContent = new JPanel();
 		pageContent.setLayout(new BorderLayout(0, 0));
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
@@ -96,7 +109,6 @@ public class PageFrame extends JFrame {
 		gbc.weighty = 1.0;
 		gbc.fill = GridBagConstraints.BOTH;
 		content.add(pageContent, gbc);
-		buttonBar = new ButtonBar();
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 4;

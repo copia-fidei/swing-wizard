@@ -24,10 +24,6 @@ class Page2Data extends PageData {
 	private String  selectedComboOption = DEFAULT_COMBOBOX_SELECTED_OPTION;
 	private boolean buttonSelected      = DEFAULT_BUTTON_SELECTED_STATE;
 
-	Page2Data(PageDataPool pageDataPool) {
-		super(pageDataPool);
-	}
-
 	@Override
 	public void load() {
 		selectedRadioOption = preferences.get(KEY_RADIO_BUTTON_SELECTED_OPTION, DEFAULT_RADIO_BUTTON_SELECTED_OPTION);

@@ -33,10 +33,10 @@ class ReviewPageData extends NoOpPageData {
 	}
 
 	private Optional<Page1Data> getPage1Data() {
-		return pageDataPool.getPageData(Page1Data.class);
+		return pageDataPool.get(Page1Data.class);
 	}
 
 	private Optional<Page2Data> getPage2Data() {
-		return pageDataPool.getPageData(Page2Data.class);
+		return pageDataPool.get(Page2Data.class);
 	}
 }

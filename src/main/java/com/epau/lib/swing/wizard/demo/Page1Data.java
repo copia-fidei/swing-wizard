@@ -15,10 +15,6 @@ class Page1Data extends PageData {
 	private String value1 = DEFAULT_VALUE_1;
 	private String value2 = DEFAULT_VALUE_2;
 
-	Page1Data(PageDataPool pageDataPool) {
-		super(pageDataPool);
-	}
-
 	@Override
 	public void load() {
 		value1 = preferences.get(KEY_VALUE_1, DEFAULT_VALUE_1);

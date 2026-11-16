@@ -26,8 +26,8 @@ class DemoWizard {
 
 				@Override
 				protected void addPages() {
-					var page1Data      = new Page1Data(pageDataPool);
-					var page2Data      = new Page2Data(pageDataPool);
+					var page1Data      = new Page1Data();
+					var page2Data      = new Page2Data();
 					var reviewPageData = new ReviewPageData(pageDataPool);
 
 					pageDataPool.add(page1Data);

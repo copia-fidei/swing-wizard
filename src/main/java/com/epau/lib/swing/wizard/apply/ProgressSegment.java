@@ -37,7 +37,7 @@ public class ProgressSegment extends JPanel {
 
 	private void buildGUI() {
 		setLayout(new BorderLayout(5, 0));
-		cancelButton.setToolTipText(nls.get("ProgressSegment.tooltip.Cancel_{0}", operation.getTitle()));
+		cancelButton.setToolTipText(nls.get("ProgressSegment.tooltip.Cancel_{0}", operation.title()));
 
 		progressBar.setStringPainted(true);
 
@@ -72,11 +72,11 @@ public class ProgressSegment extends JPanel {
 		});
 	}
 	private void updateGUI() {
-		OperationStatus status   = operation.getStatus();
+		OperationStatus status   = operation.status();
 		int             progress = operation.getProgress();
 		progressBar.setValue(progress);
 		progressBar.setIcon(getIcon(status));
-		progressBar.setString(operation.getTitle() + " – " + getDescription(status) + " (" + progress + "%)");
+		progressBar.setString(operation.title() + " – " + getDescription(status) + " (" + progress + "%)");
 		cancelButton.setEnabled(status == OperationStatus.RUNNING);
 	}
 
